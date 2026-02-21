@@ -14,7 +14,7 @@ const halamanLogin = () => {
            {/* <button onClick={handlerLogin}>Login</button> <br /> }*/}
            {/* <button onClick={() => push("/produk")}>Login </button> <br /> */}
             <button onClick={() => handlerLogin()}>Login</button> <br />
-            <Link href="/auth/register">Ke Halaman Register</Link>
+           <p>Belum punya akun? <br /> <Link href="/auth/register">Ke Halaman Register</Link></p>
         </div>
     );
 };
