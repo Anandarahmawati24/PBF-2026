@@ -10,8 +10,8 @@ const Appshell = (props: AppshellProps) => {
         <main>
             <Navbar />
             {children}
-            <div>
-                footer
+            <div className="footer">
+                Footer
             </div>
         </main>
     );
