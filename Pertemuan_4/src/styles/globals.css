@@ -38,3 +38,8 @@ a {
   position: fixed;
 
 }
+
+ul {
+  list-style: disc;
+  padding-left: 40px;
+}
