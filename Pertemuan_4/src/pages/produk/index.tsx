@@ -1,10 +1,17 @@
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 
-const produk = () => {
-    return (
-        <div>
-            Produk Page
-        </div>
-    );
+const Produk = () => {
+  const [isLogin, setIsLogin] = useState(false);
+  const { push } = useRouter();
+
+  useEffect(() => {
+    if (!isLogin) {
+      push("/auth/login");
+    }
+  }, [isLogin, push]);
+
+  return <div>Produk Page</div>;
 };
 
-export default produk;
+export default Produk;
