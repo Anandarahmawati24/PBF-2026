@@ -1,15 +1,16 @@
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 const Produk = () => {
-  const [isLogin, setIsLogin] = useState(false);
-  const { push } = useRouter();
+  const router = useRouter();
 
   useEffect(() => {
+    const isLogin = localStorage.getItem("isLogin");
+
     if (!isLogin) {
-      push("/auth/login");
+      router.push("/auth/login");
     }
-  }, [isLogin, push]);
+  }, [router]);
 
   return <div>Produk Page</div>;
 };
