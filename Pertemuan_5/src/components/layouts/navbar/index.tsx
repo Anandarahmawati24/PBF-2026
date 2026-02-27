@@ -6,7 +6,6 @@ const Navbar = () => {
         <div>
         <h1>Navbar component</h1>
         </div>
-        <h1>Navbar component</h1>
       </div>
     );
 };

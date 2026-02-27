@@ -1,15 +1,15 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
+import styles from "./login.module.css";
 
 const halamanLogin = () => {
     const {push} = useRouter();
     const handlerLogin = () => {
-      localStorage.setItem("isLogin", "true"); 
-      push("/produk");
+     // logic login
+        push("/produk");
     };
     return (
-        <div>
-
+        <div className={styles.login}>
             <h1>Halaman Login</h1>
            {/* <button onClick={handlerLogin}>Login</button> <br /> }*/}
            {/* <button onClick={() => push("/produk")}>Login </button> <br /> */}
