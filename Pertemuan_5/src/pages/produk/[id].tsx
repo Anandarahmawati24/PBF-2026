@@ -1,16 +1,11 @@
-import { useRouter } from "next/router";
+import DetailProdukView from "@/views/produk/detail";
 
-const HalamanProduk = () => {
- // const router = useRouter();
- // console.log(Router);
-   const { query } = useRouter();
-
+const detailProduk = () => {
   return (
-    <div>
-      <h2>Halaman Produk</h2>
-      <p>Produk: {query.id}</p>
-    </div>
+    <>
+      <DetailProdukView />
+    </>
   );
 };
 
-export default HalamanProduk;
+export default detailProduk;
