@@ -3,10 +3,9 @@ import { useEffect, useState } from "react";
 
 type ProductType = {
   id: string;
-  nama: string;
-  harga: number;
-  ukuran: string;
-  warna: string;
+  name: string;
+  price: number;
+  size: string;
 };
 
 const ProdukView = () => {
@@ -37,12 +36,11 @@ const ProdukView = () => {
   return (
     <div>
       <h1>Daftar Produk</h1>
-      {products.map((product: ProductType) => (
-        <div key={product.id}>
-          <h2>{product.nama}</h2>
-          <p>Harga: Rp {product.harga.toLocaleString()}</p>
-          <p>Ukuran: {product.ukuran}</p>
-          <p>Warna: {product.warna}</p>
+      {products.map((products: ProductType) => (
+        <div key={products.id}>
+          <h2>{products.name}</h2>
+          <p>Harga: Rp {products.price}</p>
+          <p>Ukuran: {products.size}</p>
         </div>
       ))}
     </div>
