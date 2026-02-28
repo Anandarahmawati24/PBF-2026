@@ -25,3 +25,17 @@
   width: 250px;
   margin-bottom: 20px;
 }
+
+.eror_button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: map-get($schema, color-primary);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: darken(map-get($schema, color-primary), 10%);
+  }
+}
