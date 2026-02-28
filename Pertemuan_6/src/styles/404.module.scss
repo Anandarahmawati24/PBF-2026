@@ -1,12 +1,27 @@
-.eror{
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+@import "@/styles/color.scss"; 
+.eror {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Poppins', sans-serif;
+  text-align: center;
+  padding: 20px; 
+}
 
-    &_image{
-        width: 300px;
-    }
+.eror h1 {
+  font-size: 42px;
+  color: map-get($schema, color-accent); 
+  margin: 20px 0 10px;
+}
+
+.eror p {
+  font-size: 18px;
+  color: map-get($schema, color-text); 
+}
+
+.eror_image {
+  width: 250px;
+  margin-bottom: 20px;
 }
