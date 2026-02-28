@@ -15,10 +15,10 @@ const ProdukView = () => {
   }, [router]);
 
   return (
-    <>
+    <div className="min-h-screen bg-gray-100">
       <HeroSection />
       <MainSection />
-    </>
+    </div>
   );
 };
 
