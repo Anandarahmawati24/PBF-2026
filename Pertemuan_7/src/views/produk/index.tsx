@@ -6,41 +6,57 @@ type ProductType = {
   name: string;
   price: number;
   size: string;
+  category: string;
 };
 
 const ProdukView = () => {
   // const router = useRouter();
 
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState<ProductType[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
 
   // useEffect(() => {
   //   const isLogin = localStorage.getItem("isLogin");
-  //
   //   if (!isLogin) {
   //     router.push("/auth/login");
   //   }
   // }, [router]);
 
-  useEffect(() => {
-    fetch("/api/produk")
-      .then((response) => response.json())
-      .then((respondata) => {
-       // console.log("Data produk:", respondata.data);
-       setProducts(respondata.data);
-        })
-      .catch((error) => {
-        console.error("Error fetching products:", error);
-      });
-  }, []);
+  const fetchProducts = async () => {
+    try {
+      setLoading(true);
+      const response = await fetch("/api/produk");
+      const data = await response.json();
+      setProducts(data.data); 
+    } catch (error) {
+      console.error("Error fetching products:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {fetchProducts();}, []);
 
   return (
     <div>
       <h1>Daftar Produk</h1>
-      {products.map((products: ProductType) => (
-        <div key={products.id}>
-          <h2>{products.name}</h2>
-          <p>Harga: Rp {products.price}</p>
-          <p>Ukuran: {products.size}</p>
+      <button onClick={fetchProducts} disabled={loading} style={{
+          marginBottom: "20px",
+          padding: "10px 20px",
+          backgroundColor: "#4CAF50",
+          color: "white",
+          border: "none",
+          borderRadius: "5px",
+          cursor: "pointer",
+          fontWeight: "bold",
+        }}
+      >{loading ? "Loading..." : "Refresh Data"}</button>
+      {products.map((product: ProductType) => (
+        <div key={product.id} style={{border: "1px solid #ccc", marginBottom: "10px", padding: "10px",}}>
+          <h2>{product.name}</h2>
+          <p>Harga: Rp {product.price}</p>
+          <p>Ukuran: {product.size}</p>
+          <p>Kategori: {product.category}</p>
         </div>
       ))}
     </div>
