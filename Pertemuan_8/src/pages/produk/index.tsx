@@ -1,7 +1,10 @@
 import ProdukView from "@/views/produk";
 import { use, useEffect, useState } from "react";
 import { useRouter } from "next/router";
+import useSWR from "swr";
+import fetcher from "../utils/swr/fetcher";
 
+//const fetcher = (url: string) => fetch(url).then((res) => res.json());
 const halamanProduk = () => {
   // const [isLogin, setIsLogin] = useState(false);
   // const { push } = useRouter();
@@ -13,21 +16,15 @@ const halamanProduk = () => {
   //  }
   //}, []);
 
-  useEffect(() => {
-    fetch("/api/produk")
-      .then((response) => response.json())
-      .then((responsedata) => {
-        setProducts(responsedata.data);
-        //console.log("Data Products:", responsedata.data);
-  })
-      .catch((error) => {
-        console.error("Error fetching products:", error);
-      });
-    }, []);
+  const { data, error, isLoading } = useSWR("/api/produk", fetcher);
+  //cek apakah data, eror, dan isLoading sudah benar
+  //console.log("Data:", data);
+  //console.log("Error:", error);
+  //console.log("IsLoading:", isLoading);
 
     return (
       <div>
-        <ProdukView products={products} />
+        <ProdukView products={isLoading ? [] : data.data} />
       </div>
     );
 };
