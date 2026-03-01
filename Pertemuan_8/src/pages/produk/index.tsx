@@ -24,7 +24,7 @@ const halamanProduk = () => {
 
     return (
       <div>
-        <ProdukView products={isLoading ? [] : data.data} />
+        <ProdukView products={data?.data || []} isLoading={isLoading} />
       </div>
     );
 };
