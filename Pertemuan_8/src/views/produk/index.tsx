@@ -1,5 +1,4 @@
-import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import styles from "./product.module.scss";
 
 type ProductType = {
   id: string;
@@ -9,57 +8,23 @@ type ProductType = {
   category: string;
 };
 
-const ProdukView = () => {
-  // const router = useRouter();
-
-  const [products, setProducts] = useState<ProductType[]>([]);
-  const [loading, setLoading] = useState<boolean>(false);
-
-  // useEffect(() => {
-  //   const isLogin = localStorage.getItem("isLogin");
-  //   if (!isLogin) {
-  //     router.push("/auth/login");
-  //   }
-  // }, [router]);
-
-  const fetchProducts = async () => {
-    try {
-      setLoading(true);
-      const response = await fetch("/api/produk");
-      const data = await response.json();
-      setProducts(data.data); 
-    } catch (error) {
-      console.error("Error fetching products:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {fetchProducts();}, []);
-
+const ProdukView = ({products}: {products: ProductType[]}) => {
   return (
-    <div>
-      <h1>Daftar Produk</h1>
-      <button onClick={fetchProducts} disabled={loading} style={{
-          marginBottom: "20px",
-          padding: "10px 20px",
-          backgroundColor: "#4CAF50",
-          color: "white",
-          border: "none",
-          borderRadius: "5px",
-          cursor: "pointer",
-          fontWeight: "bold",
-        }}
-      >{loading ? "Loading..." : "Refresh Data"}</button>
+    <div className={styles.produk}>
+      <h1 className={styles.produk__title}>Daftar Produk</h1>
+      <div className={styles.produk__content}>
       {products.map((product: ProductType) => (
-        <div key={product.id} style={{border: "1px solid #ccc", marginBottom: "10px", padding: "10px",}}>
-          <h2>{product.name}</h2>
-          <p>Harga: Rp {product.price}</p>
-          <p>Ukuran: {product.image}</p>
-          <p>Kategori: {product.category}</p>
+        <div key={product.id} className={styles.produk__content__item}>
+          <div className={styles.produk__content__item__image}>
+            <img src={product.image} alt={product.name} width={200} />
+          </div>
+          <h2 className={styles.produk__content__item__name}>{product.name}</h2>
+          <p className={styles.produk__content__item__category}>Kategori: {product.category}</p>
+          <p className={styles.produk__content__item__price}>Rp {product.price.toLocaleString()}</p>
         </div>
       ))}
     </div>
+      </div>
   );
 };
 
