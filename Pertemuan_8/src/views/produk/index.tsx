@@ -22,7 +22,13 @@ const ProdukView = ({products}: {products: ProductType[]}) => {
           <p className={styles.produk__content__item__category}>Kategori: {product.category}</p>
           <p className={styles.produk__content__item__price}>Rp {product.price.toLocaleString()}</p>
         </div>
-      ))}
+      ))} 
+      <div className={styles.produk__content__skeleton}>
+        <div className={styles.produk__content__skeleton__image}></div>
+        <div className={styles.produk__content__skeleton__name}></div>
+        <div className={styles.produk__content__skeleton__category}></div>
+        <div className={styles.produk__content__skeleton__price}></div>
+      </div>
     </div>
       </div>
   );
