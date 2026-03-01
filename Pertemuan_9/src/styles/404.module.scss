@@ -1,0 +1,41 @@
+@import "@/styles/color.scss"; 
+.eror {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Poppins', sans-serif;
+  text-align: center;
+  padding: 20px; 
+}
+
+.eror h1 {
+  font-size: 42px;
+  color: map-get($schema, color-accent); 
+  margin: 20px 0 10px;
+}
+
+.eror p {
+  font-size: 18px;
+  color: map-get($schema, color-text); 
+}
+
+.eror_image {
+  width: 250px;
+  margin-bottom: 20px;
+}
+
+.eror_button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: map-get($schema, color-primary);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: darken(map-get($schema, color-primary), 10%);
+  }
+}
