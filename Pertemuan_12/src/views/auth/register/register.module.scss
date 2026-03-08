@@ -1,0 +1,56 @@
+@import "../../../styles/color.scss";
+
+.register {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: map-get($schema, color-secondary);
+}
+
+.card {
+  background: rgb(255, 255, 255);
+  padding: 40px;
+  border-radius: 12px;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.title {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.input {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  outline: none;
+  transition: 0.2s;
+}
+
+.button {
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  background-color: map-get($schema, color-primary);
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.link {
+  text-align: center;
+  font-size: 14px;
+  color: map-get($schema, color-accent);
+  text-decoration: none;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
