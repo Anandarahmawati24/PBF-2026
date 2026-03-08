@@ -2,8 +2,10 @@ import fetcher from "@/utils/swr/fetcher";
 import { useRouter } from "next/router";
 import useSWR from "swr";
 import DetailProduk from "../../views/DetailProduct";
+import { ProductType } from "@/types/Product.type";
 
-const HalamanProduk = () => {
+const HalamanProduk = ({product}: {product: ProductType}) => {
+  {/*digunakan client-side rendering
   const router = useRouter();
   const { produk } = router.query;
 
@@ -19,13 +21,27 @@ const HalamanProduk = () => {
 
   if (!data || !data.data) {
     return <p>Data tidak ditemukan</p>;
-  }
+  } */}
 
   return (
     <div>
-      <DetailProduk products={data.data} />
+      <DetailProduk products={product} />
     </div>
   );
 };
 
 export default HalamanProduk;
+
+//fungsi getServerSideProps akan dipanggil setiap kali halaman ini diakses, dan akan mengambil data produk dari API sebelum merender halaman.
+{/*digunakan server-side rendering*/}
+
+export async function getServerSideProps({ params } : { params: { produk: string } }) {
+  const res = await fetch(`http://localhost:3000/api/produk/${params.produk}`);
+  const respone = await res.json();
+  // console.log("Data produk yang diambil:", respone);
+  return {
+    props: {
+      product: respone.data,
+    },
+  };
+};
