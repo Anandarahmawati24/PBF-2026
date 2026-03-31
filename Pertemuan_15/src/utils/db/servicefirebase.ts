@@ -2,9 +2,7 @@ import {getFirestore,collection,getDocs,Firestore,
         getDoc,doc,query,addDoc,where,
 } from "firebase/firestore";
 import app from "./firebase";
-import { stat } from "node:fs";
 import bcrypt from "bcrypt";
-import { use } from "react";
 
 const db = getFirestore(app);
 
@@ -49,19 +47,18 @@ export async function signUp(
   });
   } else {
     userData.password = await bcrypt.hash(userData.password, 10);
-    userData.role = "user";
-    await addDoc(collection(db, "users"), userData)
-      .then(() => {
-        callback({
-          status: "success",
-          message: "User registered successfully",
-        });
-      })
-      .catch((error) => {
-        callback({
-          status: "error",
-          message: error.message,
-        });
-      });
+    userData.role = "member";
+    try {
+    await addDoc(collection(db, "users"), userData);
+     callback({
+      status: "success",
+      message: "User registered successfully",
+     });
+    } catch (error: any) {
+     callback({
+      status: "error",
+      message: error.message,
+  });
   }
+}
 }
