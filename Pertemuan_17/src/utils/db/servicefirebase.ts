@@ -62,7 +62,7 @@ export async function signUp(
   });
   } else {
     userData.password = await bcrypt.hash(userData.password, 10);
-    userData.role = "member";
+    userData.role = userData.role || "member";
     try {
     await addDoc(collection(db, "users"), userData);
      callback({

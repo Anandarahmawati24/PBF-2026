@@ -6,8 +6,9 @@ function middleware(request: NextRequest, event: NextFetchEvent) {
   return NextResponse.next();
 }
 
-export default withAuth(middleware, ["/profile", "/produk", "/about", "/admin"]);
+export default withAuth(middleware, ["/profile", "/produk", "/about",
+                                     "/admin", "/editor"]);
 
 export const config = {
-  matcher: ["/profile","/produk","/about","/admin"],
+  matcher: ["/profile","/produk","/about","/admin","/editor"],
 };
