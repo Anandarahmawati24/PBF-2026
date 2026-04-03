@@ -1,7 +1,10 @@
 import {useRouter} from "next/router";
-import Navbar from "../navbar";
+//import Navbar from "../navbar";
 import { Montserrat } from "next/font/google";
+import dynamic from "next/dynamic";
 
+const Navbar = dynamic(() => import("../navbar"), {
+  loading: () => <p>Loading Navbar...</p>,ssr: false, });
 const disableNavbar = ["/auth/login", "/auth/register","/404"];
 type AppshellProps = {
     children: React.ReactNode;
