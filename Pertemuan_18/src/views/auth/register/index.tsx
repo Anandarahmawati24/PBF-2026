@@ -41,6 +41,12 @@ const TampilanRegister = () => {
     // const result = await response.json();
     // console.log(result);
     if (response.status === 200) {
+      if (typeof window !== "undefined" && window.gtag) {
+        window.gtag("event", "register_success", {
+          event_category: "auth",
+          event_label: email,
+        });
+      }
       form.reset();
       //event.currentTarget.reset();
       setIsLoading(false);

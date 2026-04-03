@@ -69,6 +69,13 @@ const TampilanLogin = () => {
         setIsLoading(false);
         setError("wrong email or password. Please try again.");
       } else {
+        //EVENT LOGIN SUCCESS
+        if (typeof window !== "undefined" && window.gtag) {
+          window.gtag("event", "login_success", {
+            event_category: "auth",
+            event_label: event.target.email.value,
+          });
+        }
         setIsLoading(false);
         push(callbackUrl);
       }
@@ -124,7 +131,14 @@ const TampilanLogin = () => {
             <br /> <br />
             <button
               type="button"
-              onClick={() => signIn("google", { callbackUrl })}
+              onClick={() => {
+                if (typeof window !== "undefined" && window.gtag) {
+                  window.gtag("event", "login_google", {
+                    event_category: "auth",
+                  });
+                }
+                signIn("google", { callbackUrl });
+              }}
               className={style.login__form__item__button}
               disabled={isLoading}
             >
@@ -133,7 +147,14 @@ const TampilanLogin = () => {
             <br /> <br />
             <button
               type="button"
-              onClick={() => signIn("github", { callbackUrl })}
+              onClick={() => {
+                if (typeof window !== "undefined" && window.gtag) {
+                  window.gtag("event", "login_github", {
+                    event_category: "auth",
+                  });
+                }
+                signIn("github", { callbackUrl });
+              }}
               className={style.login__form__item__button}
               disabled={isLoading}
             >
