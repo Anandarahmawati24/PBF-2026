@@ -1,6 +1,6 @@
 import NextAuth, { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import {signIn, signInWithGoogle, signInWithGithub} from "@/utils/db/servicefirebase";
+import {signIn, signInOAuth} from "@/utils/db/servicefirebase";
 import bcrypt from "bcrypt";
 import GoogleProvider from "next-auth/providers/google";
 import GithubProvider from "next-auth/providers/github";
@@ -57,8 +57,8 @@ export const authOptions: NextAuthOptions = {
         token.fullname = user.fullname;
         token.role = user.role;
       }
-      // jika ingin login dengan google, tambahkan informasi yang diperlukan ke token
-      if (account?.provider === "google") {
+      //logic untuk login dengan google dan github, jika user sudah ada maka ambil data, jika belum ada maka buat data baru
+      if (account?.provider === "google" || account?.provider === "github") {
         const data = {
           fullname: user.name,
           email: user.email,
@@ -66,34 +66,16 @@ export const authOptions: NextAuthOptions = {
           type: account.provider,
         };
 
-        await signInWithGoogle(data, (result: any) => {
-          //pastikan mengecek result.status sesuai dengan objek yang dikirim
+        await signInOAuth(data, (result: any) => {
           if (result.status) {
-          token.fullname =result.data.fullname;
-          token.email = result.data.email;
-          token.image = result.data.image;
-          token.type = result.data.type;
-        }
+            token.fullname = result.data.fullname;
+            token.email = result.data.email;
+            token.image = result.data.image;
+            token.type = result.data.type;
+            token.role = result.data.role;
+          }
         });
       }
-      if (account?.provider === "github") {
-        const data = {
-          fullname: user.name,
-          email: user.email,
-          image: user.image,
-          type: account.provider,
-        };
-
-        await signInWithGithub(data, (result: any) => {
-          //pastikan mengecek result.status sesuai dengan objek yang dikirim
-          if (result.status) {
-          token.fullname =result.data.fullname;
-          token.email = result.data.email;
-          token.image = result.data.image;
-          token.type = result.data.type;
-        }
-        });
-          }
       return token;
     },
     async session({ session, token }: any) {
