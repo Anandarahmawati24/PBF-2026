@@ -1,6 +1,6 @@
 import NextAuth, { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import {signIn} from "@/utils/db/servicefirebase";
+import {signIn, signInWithGoogle} from "@/utils/db/servicefirebase";
 import bcrypt from "bcrypt";
 import GoogleProvider from "next-auth/providers/google";
 
@@ -61,11 +61,15 @@ export const authOptions: NextAuthOptions = {
           type: account.provider,
         };
 
-        //console.log ("google login data",{data});
-        token.fullname = data.fullname;
-        token.email = data.email;
-        token.image = data.image;
-        token.type = data.type;
+        await signInWithGoogle(data, (result: any) => {
+          //pastikan mengecek result.status sesuai dengan objek yang dikirim
+          if (result.status) {
+          token.fullname =result.data.fullname;
+          token.email = result.data.email;
+          token.image = result.data.image;
+          token.type = result.data.type;
+        }
+        });
       }
       return token;
     },
