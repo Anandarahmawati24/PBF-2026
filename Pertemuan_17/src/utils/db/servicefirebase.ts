@@ -118,3 +118,44 @@ export async function signInWithGoogle(userData:any, callback:any) {
     });
   }
 }
+
+export async function signInWithGithub(userData:any, callback:any) {
+    try {
+      const q = query(
+        collection(db, "users"),
+        where("email", "==", userData.email),
+      );
+
+      const querySnapshot = await getDocs(q);
+      const data:any = querySnapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+
+      if (data.length > 0) {
+        //user sudah ada, update data
+        userData.role = data[0].role; 
+        await updateDoc(doc(db, "users", data[0].id), userData);
+        callback({
+          status: true,
+          message: "User registered and login with github",
+          data: userData,
+        });
+      } else {
+        //user belum ada, buat akun baru
+        userData.role = "member";
+        await addDoc(collection(db, "users"), userData);
+        callback({
+          status: true,
+          message: "User registered and login with github",
+          data: userData,
+        });
+      }
+    } catch (error: any) {
+      //tanngani error
+      callback({
+        status: false,
+        message: "failed to register user with github",
+      });
+    } 
+  }

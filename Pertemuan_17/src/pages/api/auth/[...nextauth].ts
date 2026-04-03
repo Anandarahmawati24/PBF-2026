@@ -1,8 +1,9 @@
 import NextAuth, { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import {signIn, signInWithGoogle} from "@/utils/db/servicefirebase";
+import {signIn, signInWithGoogle, signInWithGithub} from "@/utils/db/servicefirebase";
 import bcrypt from "bcrypt";
 import GoogleProvider from "next-auth/providers/google";
+import GithubProvider from "next-auth/providers/github";
 
 export const authOptions: NextAuthOptions = {
   session: {
@@ -43,6 +44,10 @@ export const authOptions: NextAuthOptions = {
       clientId: process.env.GOOGLE_CLIENT_ID || "",
       clientSecret: process.env.GOOGLE_CLIENT_SECRET || "",
     }),
+    GithubProvider({
+      clientId: process.env.GITHUB_CLIENT_ID || "",
+      clientSecret: process.env.GITHUB_CLIENT_SECRET || "",
+    })
   ],
 
   callbacks: {
@@ -71,6 +76,24 @@ export const authOptions: NextAuthOptions = {
         }
         });
       }
+      if (account?.provider === "github") {
+        const data = {
+          fullname: user.name,
+          email: user.email,
+          image: user.image,
+          type: account.provider,
+        };
+
+        await signInWithGithub(data, (result: any) => {
+          //pastikan mengecek result.status sesuai dengan objek yang dikirim
+          if (result.status) {
+          token.fullname =result.data.fullname;
+          token.email = result.data.email;
+          token.image = result.data.image;
+          token.type = result.data.type;
+        }
+        });
+          }
       return token;
     },
     async session({ session, token }: any) {
