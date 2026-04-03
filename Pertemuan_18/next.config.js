@@ -2,12 +2,6 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    //simple domain untuk avatar
-    // domains digunakan untuk sumber gambar yang umum dan tidak perlu filtering
-    domains: [
-      "lh3.googleusercontent.com", // Google avatar
-      "avatars.githubusercontent.com", // GitHub avatar
-    ],
     //remote pattern untuk gambar produk
     // remotePatterns digunakan untuk sumber eksternal yang membutuhkan kontrol lebih detail
     remotePatterns: [
@@ -29,6 +23,16 @@ const nextConfig = {
       {
         protocol: "https",
         hostname: "d1yutv2xslo29o.cloudfront.net",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "lh3.googleusercontent.com",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "avatars.githubusercontent.com",
         pathname: "/**",
       },
     ],
