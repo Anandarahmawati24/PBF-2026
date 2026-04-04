@@ -10,13 +10,17 @@ jest.mock("next-auth/react", () => ({
 }));
 
 // mock next/image
-jest.mock("next/image", () => (props: any) => {
-  return <img {...props} />;
+jest.mock("next/image", () => {
+  const MockImage = (props: any) => <img {...props} />;
+  MockImage.displayName = "MockImage";
+  return MockImage;
 });
 
 //mock Script
 jest.mock("next/dist/client/script", () => {
-  return ({ children }: any) => <>{children}</>;
+  const MockScript = ({ children }: any) => <>{children}</>;
+  MockScript.displayName = "MockScript";
+  return MockScript;
 });
 
 describe("Navbar Component", () => {

@@ -5,7 +5,7 @@ import useSWR from "swr";
 import fetcher from "../../utils/swr/fetcher";
 
 //const fetcher = (url: string) => fetch(url).then((res) => res.json());
-const halamanProduk = () => {
+const HalamanProduk = () => {
   // const [isLogin, setIsLogin] = useState(true);
   const { push } = useRouter();
   const [products, setProducts] = useState([]);
@@ -29,4 +29,4 @@ const halamanProduk = () => {
   );
 };
 
-export default halamanProduk;
+export default HalamanProduk;

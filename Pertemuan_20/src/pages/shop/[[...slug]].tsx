@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 
-const halamanToko = () => {
+const HalamanToko = () => {
     //const Router = useRouter();
    //  console.log(Router);
     const { query } = useRouter();
@@ -18,4 +18,4 @@ const halamanToko = () => {
     );
 }
 
-export default halamanToko;
+export default HalamanToko;

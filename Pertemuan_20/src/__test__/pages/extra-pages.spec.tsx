@@ -20,15 +20,18 @@ jest.mock("next/router", () => ({
 }));
 
 // mock next/link
-jest.mock(
-  "next/link",
-  () =>
-    ({ children }: any) =>
-      children,
-);
+jest.mock("next/link", () => {
+  const MockLink = ({ children }: any) => children;
+  MockLink.displayName = "MockLink";
+  return MockLink;
+});
 
 // mock next/image
-jest.mock("next/image", () => (props: any) => <img {...props} />);
+jest.mock("next/image", () => {
+  const MockImage = (props: any) => <img {...props} />;
+  MockImage.displayName = "MockImage";
+  return MockImage;
+});
 
 // mock next-auth
 jest.mock("next-auth/react", () => ({
