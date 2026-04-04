@@ -9,18 +9,22 @@ const Navbar = () => {
   // console.log("session", session)
   return (
     <div className={styles.navbar}>
-    {/* <div className={styles.navbar__brand}>
+      {/* <div className={styles.navbar__brand}>
     MyApp
     </div> */}
-    <div className={styles.navbar__brand} id="title"></div>
-    <Script id="title-script" strategy='lazyOnload'>
-      {`document.getElementById('title').innerHTML ='MyApp';`}
-    </Script>
-    <div className={styles.navbar__right}>
-      {data ? (
-        <>
-          <div className={styles.navbar__user}>
-            Welcome, {data.user?.fullname}
+      <div
+        className={styles.navbar__brand}
+        id="title"
+        data-testid="title"
+      ></div>
+      <Script id="title-script" strategy="lazyOnload">
+        {`document.getElementById('title').innerHTML ='MyApp';`}
+      </Script>
+      <div className={styles.navbar__right}>
+        {data ? (
+          <>
+            <div className={styles.navbar__user}>
+              Welcome, {data.user?.fullname}
               {data.user?.image ? (
                 /* <img src={data.user.image}
                  alt={data.user.fullname}
