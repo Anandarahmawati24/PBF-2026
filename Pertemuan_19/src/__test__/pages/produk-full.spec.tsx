@@ -42,7 +42,7 @@ global.fetch = jest.fn(() =>
   }),
 ) as jest.Mock;
 
-describe("FULL PRODUK TEST 🚀", () => {
+describe("FULL PRODUK TEST", () => {
   // SNAPSHOT
   it("snapshot produk page", () => {
     const page = render(<ProdukPage />);
