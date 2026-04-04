@@ -12,11 +12,7 @@ const Navbar = () => {
       {/* <div className={styles.navbar__brand}>
     MyApp
     </div> */}
-      <div
-        className={styles.navbar__brand}
-        id="title"
-        data-testid="title"
-      ></div>
+      <div className={styles.navbar__brand} id="title" data-testid="title"></div>
       <Script id="title-script" strategy="lazyOnload">
         {`document.getElementById('title').innerHTML ='MyApp';`}
       </Script>

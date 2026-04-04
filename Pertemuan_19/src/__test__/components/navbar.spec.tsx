@@ -21,12 +21,9 @@ jest.mock("next/dist/client/script", () => {
 
 describe("Navbar Component", () => {
   const { useSession } = require("next-auth/react");
-
   it("renders Sign In when not logged in", () => {
     useSession.mockReturnValue({ data: null });
-
     render(<Navbar />);
-
     expect(screen.getByText("Sign In")).toBeInTheDocument(); 
   });
 
@@ -39,23 +36,18 @@ describe("Navbar Component", () => {
         },
       },
     });
-
     render(<Navbar />);
-
     expect(screen.getByText(/Welcome, John Doe/i)).toBeInTheDocument();
   });
 
   it("renders title", () => {
     useSession.mockReturnValue({ data: null });
-
     render(<Navbar />);
-
     expect(screen.getByTestId("title")).toBeInTheDocument(); 
   });
 
   it("matches snapshot", () => {
     useSession.mockReturnValue({ data: null });
-
     const page = render(<Navbar />);
     expect(page).toMatchSnapshot(); 
   });
