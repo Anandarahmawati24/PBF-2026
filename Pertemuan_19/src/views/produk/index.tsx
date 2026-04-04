@@ -23,7 +23,7 @@ const ProdukView = ({products, isLoading = false,}: {products: ProductType[];isL
                 <div className={styles.produk__content__skeleton__price}></div>
               </div>
             ))
-          : products.map((product: ProductType) => (
+          : products?.map((product: ProductType) => (
               <Link href={`/produk/${product.id}`}  key={product.id} className={styles.produk__content__item}>
                 <div className={styles.produk__content__item__image}>
                   <Image src={product.image} alt={product.name} width={200} height={200} />
